@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: saldes-model
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+
+spec:
+  ingressClassName: traefik
+
+  tls:
+    - hosts:
+        - nore-lindkvist.89-167-53-206.sslip.io
+      secretName: saldes-model-tls
+
+  rules:
+    - host: nore-lindkvist.89-167-53-206.sslip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: saldes-model
+                port:
+                  number: 80

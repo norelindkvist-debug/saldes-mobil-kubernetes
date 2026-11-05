@@ -9,6 +9,11 @@ spec:
 
   strategy:
     type: RollingUpdate
+    rollingUpdate:
+      #extra podd under uppdatering
+      maxSurge: 1
+      # Håller befintlig podd tills ersättning
+      maxUnavailable: 0
 
   selector:
     matchLabels:

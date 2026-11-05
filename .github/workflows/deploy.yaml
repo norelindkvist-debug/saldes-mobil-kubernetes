@@ -24,6 +24,7 @@ jobs:
       - name: Installera kubectl
         uses: azure/setup-kubectl@v4
 
+      # AI kod
       - name: Konfigurera Kubernetes
         env:
           KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG }}
@@ -38,4 +39,5 @@ jobs:
         run: |
           kubectl set image -f k8s/deployment.yaml saldes-model="$IMAGE" --local -o yaml | kubectl apply -f -
           kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/ingress.yaml
           kubectl rollout status deployment/saldes-model --timeout=180s
